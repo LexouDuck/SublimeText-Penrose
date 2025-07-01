@@ -1,2 +1,2 @@
 # SublimeText-Penrose
-Penrose support for SublimeText3
+[Penrose](https://penrose.cs.cmu.edu/) support for [Sublime Text](https://www.sublimetext.com/)

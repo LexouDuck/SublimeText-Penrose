@@ -1,7 +1,7 @@
 %YAML 1.2
 ---
 name: Penrose Substance
-scope: source.substance
+scope: source.penrose.substance
 
 file_extensions:
   - substance
@@ -16,45 +16,45 @@ contexts:
     - include: string_latex
 
     - match: \b(Label|AutoLabel|NoLabel)\b
-      scope: keyword.declaration.label.substance
+      scope: keyword.declaration.label.penrose.substance
     - match: \b(All|None)\b
-      scope: keyword.other.substance
+      scope: keyword.other.penrose.substance
 
     - match: \b(for)\b
-      scope: keyword.control.loop.for.substance
+      scope: keyword.control.loop.for.penrose.substance
       push:
-        - meta_scope: source.for.substance
+        - meta_scope: source.for.penrose.substance
         - match: \s*({{name}})\s+(in)\s+
           captures:
-            1: variable.parameter.substance
-            2: keyword.control.substance
+            1: variable.parameter.penrose.substance
+            2: keyword.control.penrose.substance
         - include: expression
         - match: \b(where)\b
-          scope: keyword.control.conditional.select.substance
+          scope: keyword.control.conditional.select.penrose.substance
           pop: true
         - match: $
           pop: true
 
     - match: \b({{name}})\s*(?=\()
       captures:
-        1: variable.function.substance
+        1: variable.function.penrose.substance
 
     - match: ^\s*(((Let)|({{name}}))\s+)?({{name}})\s*(:=)\s*
       captures:
-        3: keyword.declaration.substance
-        4: storage.type.substance
-        5: entity.name.constant.substance
-        6: keyword.operator.assignment.substance
+        3: keyword.declaration.penrose.substance
+        4: storage.type.penrose.substance
+        5: entity.name.constant.penrose.substance
+        6: keyword.operator.assignment.penrose.substance
 
     - match: ^\s*(({{name}})\s+)?({{name}})
       captures:
-        2: storage.type.substance
-        3: entity.name.constant.substance
+        2: storage.type.penrose.substance
+        3: entity.name.constant.penrose.substance
       push:
         - match: \s*(,)\s*({{name}})
           captures:
-            1: punctuation.separator.sequence.substance
-            2: entity.name.constant.substance
+            1: punctuation.separator.sequence.penrose.substance
+            2: entity.name.constant.penrose.substance
         - include: comment
         - include: string
         - include: string_latex
@@ -69,46 +69,46 @@ contexts:
     - include: operators
 
     - match: '\b(true|false)\b'
-      scope: constant.language.boolean.lean
+      scope: constant.language.boolean.penrose.substance
 
     - include: number
 
   operators:
     - match: ([-+*/%^]|\bmod\b)
-      scope: keyword.operator.arithmetic.substance
+      scope: keyword.operator.arithmetic.penrose.substance
     - match: (==|!=|<|>|<=|>=)
-      scope: keyword.operator.comparison.substance
+      scope: keyword.operator.comparison.penrose.substance
     - match: (\&\&|\|\||!)
-      scope: keyword.operator.logical.substance
+      scope: keyword.operator.logical.penrose.substance
 
 
 
   comment:
     - match: --
-      scope: comment.line.domain
+      scope: comment.line.penrose.substance
       push:
-        - meta_scope: comment.line.domain
+        - meta_scope: comment.line.penrose.substance
         - match: \b(TODO|FIXME|XXX|NOTE)\b
-          scope: comment.keyword.domain
+          scope: comment.keyword.penrose.substance
         - match: $
           pop: true
 
   string:
     - match: '"'
-      scope: string.quoted.double.domain
+      scope: string.quoted.double.penrose.substance
       push:
-        - meta_scope: string.quoted.double.domain
+        - meta_scope: string.quoted.double.penrose.substance
         - match: \\.
-          scope: constant.character.escape.domain
+          scope: constant.character.escape.penrose.substance
         - match: '"'
           pop: true
 
   string_latex:
     - match: '\$'
-      scope: string.quoted.other.latex.substance
+      scope: string.quoted.other.latex.penrose.substance
       push:
         - match: '\$'
-          scope: string.quoted.other.latex.substance
+          scope: string.quoted.other.latex.penrose.substance
           pop: true
         - include: scope:source.latex
 
@@ -119,9 +119,9 @@ contexts:
           \b
           [0-9a-f]++ # iterate over number characters
           \b (?!\.)
-      scope: constant.numeric.color.hexadecimal.csv
+      scope: constant.numeric.color.hexadecimal.penrose.substance
       captures:
-        1: constant.numeric.other.prefix.csv
+        1: constant.numeric.other.prefix.penrose.substance
 
     - match: |-
         (?ix)  # hexadecimal float literal
@@ -130,7 +130,7 @@ contexts:
           # special text
           (inf|nan)
           \b
-      scope: constant.numeric.float.special.csv
+      scope: constant.numeric.float.special.penrose.substance
 
     - match: |-
         (?ix)  # hexadecimal float literal
@@ -148,17 +148,17 @@ contexts:
           # remaining valid chars and type specifier suffix
           [0-9]*+ (f?)
           \b (?!\.)
-      scope: constant.numeric.float.hexadecimal.csv
+      scope: constant.numeric.float.hexadecimal.penrose.substance
       captures:
-        1: constant.numeric.other.prefix.csv
-        2: invalid.illegal.number.missing-fragment.significand.csv
-        3: invalid.illegal.numeric-literal-character.float.whole-number.csv
-        4: invalid.illegal.numeric-literal-character.float.fraction.csv
-        5: keyword.other.exponent.hexadecimal.csv
-        6: invalid.illegal.numeric-literal-character.float.exponent.csv
-        7: invalid.illegal.numeric-literal-character.float.exponent.csv
-        8: invalid.illegal.number.missing-fragment.exponent.csv
-        9: constant.numeric.other.suffix.csv
+        1: constant.numeric.other.prefix.penrose.substance
+        2: invalid.illegal.number.missing-fragment.significand.penrose.substance
+        3: invalid.illegal.numeric-literal-character.float.whole-number.penrose.substance
+        4: invalid.illegal.numeric-literal-character.float.fraction.penrose.substance
+        5: keyword.other.exponent.hexadecimal.penrose.substance
+        6: invalid.illegal.numeric-literal-character.float.exponent.penrose.substance
+        7: invalid.illegal.numeric-literal-character.float.exponent.penrose.substance
+        8: invalid.illegal.number.missing-fragment.exponent.penrose.substance
+        9: constant.numeric.other.suffix.penrose.substance
     - match: |-
         (?ix)  # hexadecimal float literal, without required exponent
           [+\-]? # optional number sign
@@ -168,12 +168,12 @@ contexts:
                [0-9a-f]*+ ([0-9a-z&&[^p]]*?) [0-9a-f]*+
           (\.) [0-9a-f]*+ ([0-9a-z.&&[^p]]*?) [0-9a-f]*+
           (?:(?<=\.)|\b) (?!\.)
-      scope: constant.numeric.float.hexadecimal.csv
+      scope: constant.numeric.float.hexadecimal.penrose.substance
       captures:
-        1: constant.numeric.other.prefix.csv
-        2: invalid.illegal.numeric-literal-character.float.whole-number.csv
-        3: constant.numeric.other.decimalpoint.csv
-        4: invalid.illegal.numeric-literal-character.float.fraction.csv
+        1: constant.numeric.other.prefix.penrose.substance
+        2: invalid.illegal.numeric-literal-character.float.whole-number.penrose.substance
+        3: constant.numeric.other.decimalpoint.penrose.substance
+        4: invalid.illegal.numeric-literal-character.float.fraction.penrose.substance
     - match: |-
         (?ix)  # decimal float literal
           [+\-]? # optional number sign
@@ -188,15 +188,15 @@ contexts:
             | ( p     [+\-]? [0-9]++
               | [ep]                  [0-9a-z.]*?) )?
           (?:(?<=\.)|\b) (?!\.)
-      scope: constant.numeric.float.decimal.csv
+      scope: constant.numeric.float.decimal.penrose.substance
       captures:
-        1: invalid.illegal.numeric-literal-character.float.whole-number.csv
-        2: constant.numeric.other.decimalpoint.csv
-        3: invalid.illegal.numeric-literal-character.float.whole-number.csv
-        4: keyword.other.exponent.decimal.csv
-        5: invalid.illegal.numeric-literal-character.float.exponent.csv
-        6: invalid.illegal.numeric-literal-character.float.exponent.csv
-        7: invalid.illegal.numeric-literal-character.float.exponent.csv
+        1: invalid.illegal.numeric-literal-character.float.whole-number.penrose.substance
+        2: constant.numeric.other.decimalpoint.penrose.substance
+        3: invalid.illegal.numeric-literal-character.float.whole-number.penrose.substance
+        4: keyword.other.exponent.decimal.penrose.substance
+        5: invalid.illegal.numeric-literal-character.float.exponent.penrose.substance
+        6: invalid.illegal.numeric-literal-character.float.exponent.penrose.substance
+        7: invalid.illegal.numeric-literal-character.float.exponent.penrose.substance
     - match: |-
         (?ix)  # decimal float literal
           [+\-]? # optional number sign
@@ -209,14 +209,14 @@ contexts:
             | ( p     [+\-]? [0-9]++
               | [ep]                  [0-9a-z.]*?) )?
           (?:(?<=\.)|\b) (?!\.)
-      scope: constant.numeric.float.decimal.csv
+      scope: constant.numeric.float.decimal.penrose.substance
       captures:
-        1: constant.numeric.other.decimalpoint.csv
-        2: invalid.illegal.numeric-literal-character.float.whole-number.csv
-        3: keyword.other.exponent.decimal.csv
-        4: invalid.illegal.numeric-literal-character.float.exponent.csv
-        5: invalid.illegal.numeric-literal-character.float.exponent.csv
-        6: invalid.illegal.numeric-literal-character.float.exponent.csv
+        1: constant.numeric.other.decimalpoint.penrose.substance
+        2: invalid.illegal.numeric-literal-character.float.whole-number.penrose.substance
+        3: keyword.other.exponent.decimal.penrose.substance
+        4: invalid.illegal.numeric-literal-character.float.exponent.penrose.substance
+        5: invalid.illegal.numeric-literal-character.float.exponent.penrose.substance
+        6: invalid.illegal.numeric-literal-character.float.exponent.penrose.substance
     - match: |-
         (?ix) # zero
           [+\-]? # optional number sign
@@ -224,16 +224,16 @@ contexts:
           (0[xbo])? # prefix
           0++ # iterate over number characters
           \b (?!\.)
-      scope: constant.numeric.integer.zero.csv
+      scope: constant.numeric.integer.zero.penrose.substance
       captures:
-        1: constant.numeric.other.prefix.csv
+        1: constant.numeric.other.prefix.penrose.substance
     - match: |-
         (?ix) # invalid (empty) number literal
           [+\-]? # optional number sign
           \b
           (?: (0x) | (0b) ) # prefix
           \b (?!\.)
-      scope: invalid.illegal.invalid-number-literal.csv
+      scope: invalid.illegal.invalid-number-literal.penrose.substance
     - match: |-
         (?ix) # hexadecimal integer literal
           [+\-]? # optional number sign
@@ -241,9 +241,9 @@ contexts:
           (0x) # prefix
           [0-9a-f]++ # iterate over number characters
           \b (?!\.)
-      scope: constant.numeric.integer.hexadecimal.csv
+      scope: constant.numeric.integer.hexadecimal.penrose.substance
       captures:
-        1: constant.numeric.other.prefix.csv
+        1: constant.numeric.other.prefix.penrose.substance
     - match: |-
         (?ix) # binary integer literal
           [+\-]? # optional number sign
@@ -251,9 +251,9 @@ contexts:
           (0b) # prefix
           [01]++ # iterate over number characters
           \b (?!\.)
-      scope: constant.numeric.integer.binary.csv
+      scope: constant.numeric.integer.binary.penrose.substance
       captures:
-        1: constant.numeric.other.prefix.csv
+        1: constant.numeric.other.prefix.penrose.substance
     - match: |-
         (?ix) # octal integer literal
           [+\-]? # optional number sign
@@ -261,13 +261,13 @@ contexts:
           (0|0o) # prefix
           [0-7]++ # iterate over number characters
           \b (?!\.)
-      scope: constant.numeric.integer.octal.csv
+      scope: constant.numeric.integer.octal.penrose.substance
       captures:
-        1: constant.numeric.other.prefix.csv
+        1: constant.numeric.other.prefix.penrose.substance
     - match: |-
         (?ix) # decimal integer literal
           [+\-]? # optional number sign
           \b
           [0-9]++ # iterate over number characters
           \b (?!\.)
-      scope: constant.numeric.integer.decimal.csv
+      scope: constant.numeric.integer.decimal.penrose.substance

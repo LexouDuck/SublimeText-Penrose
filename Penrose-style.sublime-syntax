@@ -1,7 +1,7 @@
 %YAML 1.2
 ---
 name: Penrose Style
-scope: source.style
+scope: source.penrose.style
 
 file_extensions:
   - style
@@ -16,34 +16,34 @@ contexts:
     - include: keyword
     - include: expression
     - match: \b(canvas)\b
-      scope: keyword.declaration.style
+      scope: keyword.declaration.penrose.style
       push: canvas
     - match: \b({{name}})\b
-      scope: entity.name.namespace.style
+      scope: entity.name.namespace.penrose.style
       push: namespace
 
   keyword:
     - match: \b(collect)\s+(repeatable)?\s*({{name}})\s+({{name}})\s+(into)\s+({{name}})
       captures:
-        1: keyword.control.loop.style
-        2: storage.modifier.style
-        3: storage.type.style
-        4: variable.other.readwrite.style
-        5: keyword.control.loop.style
-        6: variable.parameter.style
+        1: keyword.control.loop.penrose.style
+        2: storage.modifier.penrose.style
+        3: storage.type.penrose.style
+        4: variable.other.readwrite.penrose.style
+        5: keyword.control.loop.penrose.style
+        6: variable.parameter.penrose.style
       push:
-        - meta_scope: meta.block.collector.style
+        - meta_scope: meta.block.collector.penrose.style
         - include: comment
         - match: \s*({{name}})\s+({{name}}|`{{name}}`)
           captures:
-            1: support.type.style
-            2: variable.parameter.style
+            1: support.type.penrose.style
+            2: variable.parameter.penrose.style
           push:
             - include: comment
             - match: \s*(,)\s*({{name}}|`{{name}}`)
               captures:
-                1: punctuation.separator.sequence.style
-                2: variable.parameter.style
+                1: punctuation.separator.sequence.penrose.style
+                2: variable.parameter.penrose.style
             - match: (?=;|{|$|\bwhere\b)
               pop: true
         - match: (?=;|{|$|\bwhere\b)
@@ -53,84 +53,84 @@ contexts:
 
     - match: \b(forall|foreach|with)\s+(repeatable)?\s*
       captures:
-        1: keyword.control.loop.style
-        2: storage.modifier.style
+        1: keyword.control.loop.penrose.style
+        2: storage.modifier.penrose.style
       push:
-        - meta_scope: meta.block.selector.style
+        - meta_scope: meta.block.selector.penrose.style
         - include: comment
         - match: (?={|$|\bwhere\b)
           pop: true
         - match: \s*({{name}})\s+({{name}}|`{{name}}`)
           captures:
-            1: support.type.style
-            2: variable.parameter.style
+            1: support.type.penrose.style
+            2: variable.parameter.penrose.style
           push:
             - include: comment
             - match: (?=;|{|$|\bwhere\b)
               pop: true
             - match: \s*(,)\s*({{name}}|`{{name}}`)
               captures:
-                1: punctuation.separator.sequence.style
-                2: variable.parameter.style
+                1: punctuation.separator.sequence.penrose.style
+                2: variable.parameter.penrose.style
         - include: keyword
         - include: expression
 
     - match: \b(where)\b
       captures:
-        1: keyword.control.loop.style
-        2: storage.modifier.style
+        1: keyword.control.loop.penrose.style
+        2: storage.modifier.penrose.style
       push:
-        - meta_scope: meta.block.selector.style
+        - meta_scope: meta.block.selector.penrose.style
         - match: (?={|$)
           pop: true
         - include: expression
 
     - match: \b(layer)\s+({{name}})\s+(above|below)\s+({{name}})
       captures:
-        1: keyword.control.style
-        2: variable.other.readwrite.style
-        3: keyword.operator.word.layer.style
-        4: variable.other.readwrite.style
+        1: keyword.control.penrose.style
+        2: variable.other.readwrite.penrose.style
+        3: keyword.operator.word.layer.penrose.style
+        4: variable.other.readwrite.penrose.style
 
     - match: \b(layout)\s*(=)\s*
       captures:
-        1: keyword.declaration.style
-        2: keyword.operator.assignment.style
+        1: keyword.declaration.penrose.style
+        2: keyword.operator.assignment.penrose.style
       push:
         - match: \b({{name}})\b
-          scope: entity.name.constant.style
+          scope: entity.name.constant.penrose.style
           pop: true
         - match: (\[)
-          scope: punctuation.section.brackets.begin.style
+          scope: punctuation.section.brackets.begin.penrose.style
           push:
             - match: (,)
-              scope: punctuation.separator.sequence.style
+              scope: punctuation.separator.sequence.penrose.style
             - match: \b({{name}})\b
-              scope: entity.name.constant.style
+              scope: entity.name.constant.penrose.style
             - match: (?=\])
               pop: true
         - match: (\])
-          scope: punctuation.section.brackets.end.style
+          scope: punctuation.section.brackets.end.penrose.style
           pop: true
 
     - match: \b(import)\b
-      scope: keyword.control.import.style
+      scope: keyword.control.import.penrose.style
     - match: \b(delete|override|ensure|encourage)\b
-      scope: storage.modifier.style
+      scope: storage.modifier.penrose.style
     - match: \b(forall|foreach|with|where|collect|layer|LOCAL)\b
-      scope: keyword.control.style
+      scope: keyword.control.penrose.style
     - match: \b(rgba|hsva|none)\b
-      scope: keyword.operator.word.layer.style
+      scope: keyword.operator.word.layer.penrose.style
     - match: \b(above|below)\b(?!\s*\()
-      scope: keyword.operator.word.layer.style
+      scope: keyword.operator.word.layer.penrose.style
 
   expression:
     - match: (\()
-      scope: punctuation.section.parens.begin.style
+      scope: punctuation.section.parens.begin.penrose.style
       push:
-        - meta_scope: meta.parens.style
+        - meta_scope: meta.parens.penrose.style
         - match: (\))
-          scope: punctuation.section.parens.end.style
+          scope: punctuation.section.parens.end.penrose.style
           pop: true
         - include: comment
         - include: string
@@ -138,11 +138,11 @@ contexts:
         - include: expression
 
     - match: ({)
-      scope: punctuation.section.braces.begin.style
+      scope: punctuation.section.braces.begin.penrose.style
       push:
-        - meta_scope: meta.block.style
+        - meta_scope: meta.block.penrose.style
         - match: (})
-          scope: punctuation.section.braces.end.style
+          scope: punctuation.section.braces.end.penrose.style
           pop: true
         - include: comment
         - include: string
@@ -150,11 +150,11 @@ contexts:
         - include: expression
 
     - match: (\[)
-      scope: punctuation.section.brackets.begin.style
+      scope: punctuation.section.brackets.begin.penrose.style
       push:
-        - meta_scope: meta.braces.style
+        - meta_scope: meta.braces.penrose.style
         - match: (\])
-          scope: punctuation.section.brackets.end.style
+          scope: punctuation.section.brackets.end.penrose.style
           pop: true
         - include: comment
         - include: string
@@ -169,16 +169,16 @@ contexts:
 
   types:
     - match: (?<!\.)\b(bool|color|constraint|file|function|int|list|mat2x2|mat3x3|mat4x4|objective|path|scalar|shape|string|style|vec2|vec3|vec4)\b
-      scope: storage.type.style
+      scope: storage.type.penrose.style
     - match: (?<!\.)\b(FloatV|BoolV|StrV|PathDataV|PtListV|ColorV|ListV|VectorV|MatrixV|TupV|LListV|ShapeListV)\b
-      scope: support.type.value.style
+      scope: support.type.value.penrose.style
     - match: (?<!\.)\b(Circle|Ellipse|Equation|Group|Image|Line|Path|Polygon|Polyline|Rectangle|Text)\b
-      scope: support.type.shape.style
+      scope: support.type.shape.penrose.style
       push:
         - match: \s*({)
-          scope: punctuation.section.braces.style
+          scope: punctuation.section.braces.penrose.style
           push:
-            - meta_scope: meta.block.shape.style
+            - meta_scope: meta.block.shape.penrose.style
             - include: comment
             - include: string
             - include: keyword
@@ -189,115 +189,115 @@ contexts:
             - match: (?=})
               pop: true
         - match: (})
-          scope: punctuation.section.braces.style
+          scope: punctuation.section.braces.penrose.style
           pop: true
         - match: (.)
           pop: true
 
   operators:
     - match: (\.\*|\.\/|'|\bthen\b)
-      scope: keyword.operator.vector.style
+      scope: keyword.operator.vector.penrose.style
     - match: ([-+*/%^]|\bmod\b)
-      scope: keyword.operator.arithmetic.style
+      scope: keyword.operator.arithmetic.penrose.style
     - match: (==|!=|<|>|<=|>=)
-      scope: keyword.operator.comparison.style
+      scope: keyword.operator.comparison.penrose.style
     - match: (\&\&|\|\||!)
-      scope: keyword.operator.logical.style
+      scope: keyword.operator.logical.penrose.style
     - match: (\?)
-      scope: keyword.operator.autoeval.style
+      scope: keyword.operator.autoeval.penrose.style
     - match: (=|:)
-      scope: keyword.operator.assignment.style
+      scope: keyword.operator.assignment.penrose.style
     - match: (\.)(?=\s*{{name}})
-      scope: punctuation.accessor.style
+      scope: punctuation.accessor.penrose.style
     - match: (,|;)
-      scope: punctuation.separator.style
+      scope: punctuation.separator.penrose.style
     - match: \b(as)\b
-      scope: keyword.other.alias.style
+      scope: keyword.other.alias.penrose.style
     - match: \b(has)\b
-      scope: keyword.control.conditional.select.style
+      scope: keyword.control.conditional.select.penrose.style
     - match: \b(in|except)\b
-      scope: keyword.other.layout.style
+      scope: keyword.other.layout.penrose.style
 
   builtins:
     - match: \b(match_total|match_id|)\b
-      scope: variable.language.style
+      scope: variable.language.penrose.style
     - match: \b(canvas)\s*\.\s*(width|height)\b
-      scope: variable.language.style
+      scope: variable.language.penrose.style
 
     - match: \b(nameof|countof|numberof)\s+({{name}})\b
       captures:
-        1: keyword.operator.word.style
-        2: variable.other.readwrite.style
+        1: keyword.operator.word.penrose.style
+        2: variable.other.readwrite.penrose.style
 
     - match: \b(listof)\s+({{name}})\s+(from)\s+({{name}})\b
       captures:
-        1: keyword.control.style
-        2: variable.other.readwrite.style
-        3: keyword.control.style
-        4: variable.other.readwrite.style
+        1: keyword.control.penrose.style
+        2: variable.other.readwrite.penrose.style
+        3: keyword.control.penrose.style
+        4: variable.other.readwrite.penrose.style
 
   literals:
     - match: '\b(true|false)\b'
-      scope: constant.language.boolean.lean
+      scope: constant.language.boolean.penrose.style
 
     - include: number
 
   functions:
     - match: \b(?<!\.)(equal|lessThan|greaterThan|lessThanSq|greaterThanSq|inRange|contains1D|disjointScalar|perpendicular|collinear|collinearOrdered|onCanvas|overlapping|overlappingEllipses|overlappingCircleEllipse|disjoint|touching|contains|containsCircles|containsPolys|containsPolyCircle|containsPolyPoint|containsCirclePoint|containsCirclePoly|containsCircleRect|containsRectCircle|containsRects|distributeHorizontally|distributeVertically|disjointIntervals|isLocallyConvex|isConvex|isEquilateral|isEquiangular)\b
-      scope: support.function.constraint.style
+      scope: support.function.constraint.penrose.style
     - match: \b(?<!\.)(minimal|maximal|equal|nearVec|greaterThan|lessThan|repelPt|repelScalar|inDirection|below|above|leftwards|rightwards|sameCenter|notTooClose|near|nearPt|nonDegenerateAngle|centerLabelAbove|centerLabel|pointLineDist|isRegular|isEquilateral|isEquiangular)\b
-      scope: support.function.objective.style
+      scope: support.function.objective.penrose.style
     - match: \b(?<!\.)(makePath|get|selectColor|oneBasedElement|acosh|acos|asin|asinh|mod|atan|atan2|atanh|cbrt|ceil|cos|cosh|exp|expm1|floor|log|log2|log10|log1p|pow|round|sign|sin|sinh|tan|tanh|trunc|sum|sumVectors|maxList|minList|count|dot|identity|diagonal|trace|determinant|inverse|outerProduct|crossProductMatrix|matrix|matrix3d|rotate|rotate2d|rotate3d|rotate3dh|scale|scale2d|scale3d|scale3dh|skew|skew2d|shear|shear2d|shear3d|translate|translate3dh|lookAt|perspective|ortho|project|projectDepth|projectList|matrixMultiplyList|fromHomogeneous|fromHomogeneousList|toHomogeneous|toHomogeneousList|toHomogeneousMatrix|length|normalize|pathFromPoints|quadraticCurveFromPoints|interpolateQuadraticFromPoints|cubicCurveFromPoints|connectPaths|concatenatePaths|joinPaths|Penrose|firstPoint|lastPoint|averagePoint|interpolatingSpline|diffusionProcess|unitMark|unitMark2|arc|circularArc|repeatedArcs|wedge|ptOnLine|arcSweepFlag|angleBetween|angleFrom|cross2D|cross|lineLineIntersection|midpoint|midpointOffset|chevron|innerPointOffset|ticksOnLine|orientedSquare|triangle|average2|average|unit|random|unitRandom|diskRandom|circleRandom|sphereRandom|normalRandom|triangleRandom|sampleColor|randomIndex|setOpacity|mul|barycenter|circumcenter|circumradius|incenter|inradius|sqr|sqrt|max|min|abs|toRadians|toDegrees|norm|normsq|vdist|vmul|vdistsq|angleOf|MathE|MathPI|rot90|rotateBy|signedDistance|signedDistanceRect|signedDistanceCircle|signedDistancePolygon|signedDistanceEllipse|signedDistanceLine|signedDistancePolyline|signedDistanceGroup|unitVector|rayIntersect|rayIntersectDistance|rayIntersectCircle|rayIntersectCircleDistance|rayIntersectEllipse|rayIntersectEllipseDistance|rayIntersectLine|rayIntersectLineDistance|rayIntersectRect|rayIntersectRectDistance|rayIntersectPoly|rayIntersectPolyDistance|rayIntersectGroup|rayIntersectGroupDistance|rayIntersectNormal|rayIntersectNormalCircle|rayIntersectNormalEllipse|rayIntersectNormalLine|rayIntersectNormalRect|rayIntersectNormalPoly|rayIntersectNormalGroup|closestPoint|closestPointCircle|closestPointRect|closestPointLine|closestPointEllipse|closestPointPoly|closestPointGroup|closestSilhouettePoint|closestSilhouettePointCircle|closestSilhouettePointEllipse|closestSilhouettePointLine|closestSilhouettePointRect|closestSilhouettePointPolyline|closestSilhouettePointPolygon|closestSilhouettePointGroup|closestSilhouetteDistance|rectLineDist|shapeDistance|shapeDistanceCircles|shapeDistanceRects|shapeDistanceRectLine|shapeDistanceRectlikePolyline|shapeDistancePolys|shapeDistanceRectCircle|shapeDistancePolyEllipse|shapeDistanceCircleLine|shapeDistanceLines|signedArea|turningNumber|perimeter|isoperimetricRatio|elasticEnergy|totalCurvature|lengthK|maxCurvature|pElasticEnergy|inflectionEnergy|tangentVectors|normalVectors|binormalVectors|evoluteCurve|offsetCurve|curvatures|centerOfMass|noClip|clip|bboxPts|tsneEnergy|rectPts|TeXify|repeat)\b
-      scope: support.function.computation.style
+      scope: support.function.computation.penrose.style
     - match: \b({{name}})\s*(?=\()
       captures:
-        1: variable.function.style
+        1: variable.function.penrose.style
 
   canvas:
     - match: ({)
-      scope: punctuation.section.braces.style
+      scope: punctuation.section.braces.penrose.style
       set:
-        - meta_scope: meta.namespace.canvas.style
+        - meta_scope: meta.namespace.canvas.penrose.style
         - match: \b(width|height)\b
-          scope: variable.language.style
+          scope: variable.language.penrose.style
         - include: comment
         - include: string
         - include: keyword
         - include: expression
         - match: (})
-          scope: punctuation.section.braces.style
+          scope: punctuation.section.braces.penrose.style
           pop: true
 
   namespace:
     - match: ({)
-      scope: punctuation.section.braces.style
+      scope: punctuation.section.braces.penrose.style
       set:
-        - meta_scope: meta.namespace.style
+        - meta_scope: meta.namespace.penrose.style
         - include: comment
         - include: string
         - include: keyword
         - include: expression
         - match: (})
-          scope: punctuation.section.braces.style
+          scope: punctuation.section.braces.penrose.style
           pop: true
 
   comment:
     - match: --
-      scope: comment.line.domain
+      scope: comment.line.penrose.style
       push:
-        - meta_scope: comment.line.domain
+        - meta_scope: comment.line.penrose.style
         - match: \b(TODO|FIXME|XXX|NOTE)\b
-          scope: comment.keyword.domain
+          scope: comment.keyword.penrose.style
         - match: $
           pop: true
 
   string:
     - match: '"'
-      scope: string.quoted.double.domain
+      scope: string.quoted.double.penrose.style
       push:
-        - meta_scope: string.quoted.double.domain
+        - meta_scope: string.quoted.double.penrose.style
         - match: \\.
-          scope: constant.character.escape.domain
+          scope: constant.character.escape.penrose.style
         - match: '"'
           pop: true
 
@@ -308,9 +308,9 @@ contexts:
           \b
           [0-9a-f]++ # iterate over number characters
           \b (?!\.)
-      scope: constant.numeric.color.hexadecimal.csv
+      scope: constant.numeric.color.hexadecimal.penrose.style
       captures:
-        1: constant.numeric.other.prefix.csv
+        1: constant.numeric.other.prefix.penrose.style
 
     - match: |-
         (?ix)  # hexadecimal float literal
@@ -319,7 +319,7 @@ contexts:
           # special text
           (inf|nan)
           \b
-      scope: constant.numeric.float.special.csv
+      scope: constant.numeric.float.special.penrose.style
 
     - match: |-
         (?ix)  # hexadecimal float literal
@@ -337,17 +337,17 @@ contexts:
           # remaining valid chars and type specifier suffix
           [0-9]*+ (f?)
           \b (?!\.)
-      scope: constant.numeric.float.hexadecimal.csv
+      scope: constant.numeric.float.hexadecimal.penrose.style
       captures:
-        1: constant.numeric.other.prefix.csv
-        2: invalid.illegal.number.missing-fragment.significand.csv
-        3: invalid.illegal.numeric-literal-character.float.whole-number.csv
-        4: invalid.illegal.numeric-literal-character.float.fraction.csv
-        5: keyword.other.exponent.hexadecimal.csv
-        6: invalid.illegal.numeric-literal-character.float.exponent.csv
-        7: invalid.illegal.numeric-literal-character.float.exponent.csv
-        8: invalid.illegal.number.missing-fragment.exponent.csv
-        9: constant.numeric.other.suffix.csv
+        1: constant.numeric.other.prefix.penrose.style
+        2: invalid.illegal.number.missing-fragment.significand.penrose.style
+        3: invalid.illegal.numeric-literal-character.float.whole-number.penrose.style
+        4: invalid.illegal.numeric-literal-character.float.fraction.penrose.style
+        5: keyword.other.exponent.hexadecimal.penrose.style
+        6: invalid.illegal.numeric-literal-character.float.exponent.penrose.style
+        7: invalid.illegal.numeric-literal-character.float.exponent.penrose.style
+        8: invalid.illegal.number.missing-fragment.exponent.penrose.style
+        9: constant.numeric.other.suffix.penrose.style
     - match: |-
         (?ix)  # hexadecimal float literal, without required exponent
           [+\-]? # optional number sign
@@ -357,12 +357,12 @@ contexts:
                [0-9a-f]*+ ([0-9a-z&&[^p]]*?) [0-9a-f]*+
           (\.) [0-9a-f]*+ ([0-9a-z.&&[^p]]*?) [0-9a-f]*+
           (?:(?<=\.)|\b) (?!\.)
-      scope: constant.numeric.float.hexadecimal.csv
+      scope: constant.numeric.float.hexadecimal.penrose.style
       captures:
-        1: constant.numeric.other.prefix.csv
-        2: invalid.illegal.numeric-literal-character.float.whole-number.csv
-        3: constant.numeric.other.decimalpoint.csv
-        4: invalid.illegal.numeric-literal-character.float.fraction.csv
+        1: constant.numeric.other.prefix.penrose.style
+        2: invalid.illegal.numeric-literal-character.float.whole-number.penrose.style
+        3: constant.numeric.other.decimalpoint.penrose.style
+        4: invalid.illegal.numeric-literal-character.float.fraction.penrose.style
     - match: |-
         (?ix)  # decimal float literal
           [+\-]? # optional number sign
@@ -377,15 +377,15 @@ contexts:
             | ( p     [+\-]? [0-9]++
               | [ep]                  [0-9a-z.]*?) )?
           (?:(?<=\.)|\b) (?!\.)
-      scope: constant.numeric.float.decimal.csv
+      scope: constant.numeric.float.decimal.penrose.style
       captures:
-        1: invalid.illegal.numeric-literal-character.float.whole-number.csv
-        2: constant.numeric.other.decimalpoint.csv
-        3: invalid.illegal.numeric-literal-character.float.whole-number.csv
-        4: keyword.other.exponent.decimal.csv
-        5: invalid.illegal.numeric-literal-character.float.exponent.csv
-        6: invalid.illegal.numeric-literal-character.float.exponent.csv
-        7: invalid.illegal.numeric-literal-character.float.exponent.csv
+        1: invalid.illegal.numeric-literal-character.float.whole-number.penrose.style
+        2: constant.numeric.other.decimalpoint.penrose.style
+        3: invalid.illegal.numeric-literal-character.float.whole-number.penrose.style
+        4: keyword.other.exponent.decimal.penrose.style
+        5: invalid.illegal.numeric-literal-character.float.exponent.penrose.style
+        6: invalid.illegal.numeric-literal-character.float.exponent.penrose.style
+        7: invalid.illegal.numeric-literal-character.float.exponent.penrose.style
     - match: |-
         (?ix)  # decimal float literal
           [+\-]? # optional number sign
@@ -398,14 +398,14 @@ contexts:
             | ( p     [+\-]? [0-9]++
               | [ep]                  [0-9a-z.]*?) )?
           (?:(?<=\.)|\b) (?!\.)
-      scope: constant.numeric.float.decimal.csv
+      scope: constant.numeric.float.decimal.penrose.style
       captures:
-        1: constant.numeric.other.decimalpoint.csv
-        2: invalid.illegal.numeric-literal-character.float.whole-number.csv
-        3: keyword.other.exponent.decimal.csv
-        4: invalid.illegal.numeric-literal-character.float.exponent.csv
-        5: invalid.illegal.numeric-literal-character.float.exponent.csv
-        6: invalid.illegal.numeric-literal-character.float.exponent.csv
+        1: constant.numeric.other.decimalpoint.penrose.style
+        2: invalid.illegal.numeric-literal-character.float.whole-number.penrose.style
+        3: keyword.other.exponent.decimal.penrose.style
+        4: invalid.illegal.numeric-literal-character.float.exponent.penrose.style
+        5: invalid.illegal.numeric-literal-character.float.exponent.penrose.style
+        6: invalid.illegal.numeric-literal-character.float.exponent.penrose.style
     - match: |-
         (?ix) # zero
           [+\-]? # optional number sign
@@ -413,16 +413,16 @@ contexts:
           (0[xbo])? # prefix
           0++ # iterate over number characters
           \b (?!\.)
-      scope: constant.numeric.integer.zero.csv
+      scope: constant.numeric.integer.zero.penrose.style
       captures:
-        1: constant.numeric.other.prefix.csv
+        1: constant.numeric.other.prefix.penrose.style
     - match: |-
         (?ix) # invalid (empty) number literal
           [+\-]? # optional number sign
           \b
           (?: (0x) | (0b) ) # prefix
           \b (?!\.)
-      scope: invalid.illegal.invalid-number-literal.csv
+      scope: invalid.illegal.invalid-number-literal.penrose.style
     - match: |-
         (?ix) # hexadecimal integer literal
           [+\-]? # optional number sign
@@ -430,9 +430,9 @@ contexts:
           (0x) # prefix
           [0-9a-f]++ # iterate over number characters
           \b (?!\.)
-      scope: constant.numeric.integer.hexadecimal.csv
+      scope: constant.numeric.integer.hexadecimal.penrose.style
       captures:
-        1: constant.numeric.other.prefix.csv
+        1: constant.numeric.other.prefix.penrose.style
     - match: |-
         (?ix) # binary integer literal
           [+\-]? # optional number sign
@@ -440,9 +440,9 @@ contexts:
           (0b) # prefix
           [01]++ # iterate over number characters
           \b (?!\.)
-      scope: constant.numeric.integer.binary.csv
+      scope: constant.numeric.integer.binary.penrose.style
       captures:
-        1: constant.numeric.other.prefix.csv
+        1: constant.numeric.other.prefix.penrose.style
     - match: |-
         (?ix) # octal integer literal
           [+\-]? # optional number sign
@@ -450,13 +450,13 @@ contexts:
           (0|0o) # prefix
           [0-7]++ # iterate over number characters
           \b (?!\.)
-      scope: constant.numeric.integer.octal.csv
+      scope: constant.numeric.integer.octal.penrose.style
       captures:
-        1: constant.numeric.other.prefix.csv
+        1: constant.numeric.other.prefix.penrose.style
     - match: |-
         (?ix) # decimal integer literal
           [+\-]? # optional number sign
           \b
           [0-9]++ # iterate over number characters
           \b (?!\.)
-      scope: constant.numeric.integer.decimal.csv
+      scope: constant.numeric.integer.decimal.penrose.style

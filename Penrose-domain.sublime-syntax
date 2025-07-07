@@ -1,7 +1,7 @@
 %YAML 1.2
 ---
 name: Penrose Domain
-scope: source.domain
+scope: source.penrose.domain
 
 file_extensions:
   - domain
@@ -16,69 +16,69 @@ contexts:
 
     - match: \b(type)\s+({{name}})(\s*(<:)\s*({{name}}))?
       captures:
-        1: keyword.declaration.type.domain
-        2: entity.name.type.domain
-        4: keyword.operator.assignment.subtype.domain
-        5: storage.type.domain
+        1: keyword.declaration.type.penrose.domain
+        2: entity.name.type.penrose.domain
+        4: keyword.operator.assignment.subtype.penrose.domain
+        5: storage.type.penrose.domain
 
     - match: \b(predicate|constructor|function)\s+({{name}})\s*\(
       captures:
-        1: keyword.declaration.domain
-        2: entity.name.function.domain
+        1: keyword.declaration.penrose.domain
+        2: entity.name.function.penrose.domain
       push:
-        - meta_scope: source.definition.function.domain
+        - meta_scope: source.definition.function.penrose.domain
         - match: ({{name}})(\s+({{name}}))?\s*(?=[,\)])
           captures:
-            1: storage.type.domain
-            3: variable.parameter.domain
+            1: storage.type.penrose.domain
+            3: variable.parameter.penrose.domain
         - match: \)(\s*(->)\s*({{name}}))?
           captures:
-            3: storage.type.domain
+            3: storage.type.penrose.domain
           pop: true
 
     - match: \b(notation)\s+ #(")
       captures:
-        1: keyword.declaration.syntax.domain
-        2: string.quoted.double.notation.domain
+        1: keyword.declaration.syntax.penrose.domain
+        2: string.quoted.double.notation.penrose.domain
       # push:
       #   - match: '"'
-      #     scope: string.quoted.double.notation.domain
+      #     scope: string.quoted.double.notation.penrose.domain
       #     pop: true
       #   - include: scope:source.substance
 
     - match: \b(value)\s+({{name}})(\s*(:)\s*({{name}}))?
       captures:
-        1: keyword.declaration.syntax.domain
-        2: entity.name.constant.domain
-        4: keyword.operator.assignment.value.domain
-        5: storage.type.domain
+        1: keyword.declaration.syntax.penrose.domain
+        2: entity.name.constant.penrose.domain
+        4: keyword.operator.assignment.value.penrose.domain
+        5: storage.type.penrose.domain
 
     - match: \b(symmetric)\b
-      scope: storage.modifier.domain
+      scope: storage.modifier.penrose.domain
 
     - match: (<:)
-      scope: keyword.operator.assignment.subtype.domain
+      scope: keyword.operator.assignment.subtype.penrose.domain
     - match: (~)
-      scope: keyword.operator.assignment.syntax.domain
+      scope: keyword.operator.assignment.syntax.penrose.domain
     - match: (:)
-      scope: keyword.operator.assignment.value.domain
+      scope: keyword.operator.assignment.value.penrose.domain
 
   comment:
     - match: --
-      scope: comment.line.domain
+      scope: comment.line.penrose.domain
       push:
-        - meta_scope: comment.line.domain
+        - meta_scope: comment.line.penrose.domain
         - match: \b(TODO|FIXME|XXX|NOTE)\b
-          scope: comment.keyword.domain
+          scope: comment.keyword.penrose.domain
         - match: $
           pop: true
 
   string:
     - match: '"'
-      scope: string.quoted.double.domain
+      scope: string.quoted.double.penrose.domain
       push:
-        - meta_scope: string.quoted.double.domain
+        - meta_scope: string.quoted.double.penrose.domain
         - match: \\.
-          scope: constant.character.escape.domain
+          scope: constant.character.escape.penrose.domain
         - match: '"'
           pop: true
